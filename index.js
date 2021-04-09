@@ -27,7 +27,8 @@ app.post("/addProduct", (req,res) => {
 })
 
 app.get("/products", (req,res) => {
-    productCollection.find({}).toArray((err,documents) => {
+    const searchResult = req.query.search
+    productCollection.find({name:{$regex:searchResult}}).toArray((err,documents) => {
         res.send(documents)
     })
 })
